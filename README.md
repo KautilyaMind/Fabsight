@@ -359,3 +359,39 @@ provides potentially relevant context and never confirms a case-specific physica
 explanation. Document text is treated as untrusted data and is never executed. See
 `docs/knowledge_rag.md` for ingestion, provenance, chunking, indexing, evaluation,
 security notes, and limitations.
+
+## Version v0.7 — Grounded RAG Generation
+
+v0.6 retrieves knowledge. v0.7 retrieves knowledge and then asks a configured LLM
+to generate a grounded, structured answer with citations and limitations:
+
+```text
+question or ManufacturingCase
+        ↓
+query builder → KnowledgeRetriever → bounded context → LLM
+        ↓
+grounded RAG response with [S1], [S2] citations
+```
+
+Copy `.env.example` to `.env` and configure the Google provider, exact model name,
+and API key. The example selects the stable, free-tier-compatible
+`gemini-3.5-flash-lite`; model availability and quotas remain controlled by Google.
+The application also accepts an existing `GOOGLE_API_KEY`. Secrets and `.env` are
+never committed, logged, or placed in prompts.
+
+```powershell
+python scripts/ask_fabsight.py --question "What is CMP?"
+python scripts/explain_case.py --case CASE-00042
+python scripts/evaluate_rag.py
+```
+
+The strict system prompt treats retrieved text as untrusted content, keeps anonymous
+SECOM variables physically uninterpreted, distinguishes observations from hypotheses,
+and forbids confirmed physical root-cause claims. Responses are validated for real
+retrieved citations and basic dangerous patterns. Missing credentials do not break
+local retrieval; they produce a clear generation-unavailable message.
+
+v0.7 is a fixed retrieve-then-generate pipeline, not an autonomous agent. It has no
+tool-selection loop, persistent memory, automatic RCA plan, API, dashboard, or
+deployment framework. See `docs/rag_generation.md` for the complete architecture,
+configuration, security boundary, evaluation, and limitations.

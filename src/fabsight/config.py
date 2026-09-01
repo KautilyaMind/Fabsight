@@ -29,6 +29,7 @@ KNOWLEDGE_RAW_DIR = PROJECT_ROOT / "data" / "knowledge" / "raw"
 KNOWLEDGE_PROCESSED_DIR = PROJECT_ROOT / "data" / "knowledge" / "processed"
 EMBEDDING_MODEL_DIR = PROJECT_ROOT / "models" / "embeddings"
 RETRIEVAL_REPORT_DIR = PROJECT_ROOT / "reports" / "retrieval"
+RAG_REPORT_DIR = PROJECT_ROOT / "reports" / "rag"
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 KNOWLEDGE_CHUNK_SIZE = 1000
 KNOWLEDGE_CHUNK_OVERLAP = 150

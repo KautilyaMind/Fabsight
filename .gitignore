@@ -50,3 +50,5 @@ models/embeddings/*
 !models/embeddings/.gitkeep
 reports/retrieval/*
 !reports/retrieval/.gitkeep
+reports/rag/*
+!reports/rag/.gitkeep
