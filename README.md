@@ -189,3 +189,66 @@ SECOM variable identities remain unknown. Model coefficients and feature importa
 describe statistical reliance, not physical sensor meanings or causality. v0.1,
 v0.2, and v0.3 remain separate layers; synthetic wafers are not mapped to SECOM rows.
 See `docs/process_model.md` for the evaluation and scientific limitations.
+
+## Version v0.4 — Wafer Vision
+
+v0.4 adds a separate computer-vision path for the public WM-811K wafer-map dataset:
+
+```text
+wafer map
+    ↓
+small CNN
+    ↓
+spatial defect class
+    ↓
+confidence and ranked alternatives
+```
+
+A wafer map is a grid of die-level states, not an ordinary photograph. Spatial
+arrangements can form recognizable classes such as `CENTER`, `EDGE_RING`, or
+`SCRATCH`, but a detected class does not prove a physical root cause.
+
+Prepare the public data:
+
+```powershell
+python scripts/prepare_wafer_data.py
+```
+
+The command attempts to cache the public archive in `data/raw/wafer_maps/`. If the
+public host requires manual access, it prints the dataset page, expected
+`LSWMD.pkl` filename, and exact destination. Preparation reports label quality and
+class imbalance, resizes discrete maps with nearest-neighbor interpolation, and
+creates reproducible 70/15/15 stratified files under `data/processed/wafer_maps/`.
+
+Train and evaluate the small class-weighted CNN:
+
+```powershell
+python scripts/train_vision_model.py
+python scripts/evaluate_vision_model.py
+```
+
+Predict one numeric wafer map or grayscale representation:
+
+```powershell
+python scripts/predict_wafer.py --input path/to/wafer.npy
+```
+
+The trained state and metadata are generated under `models/vision/`; the multiclass
+confusion matrix, training curves, and JSON metrics are generated under
+`reports/vision_model/`. Generated datasets, models, and reports are excluded from
+Git, while their directory structure is retained.
+
+```text
+PROCESS SIDE                         VISION SIDE
+
+SECOM                               wafer map
+  ↓                                    ↓
+ProcessPredictor                    WaferPredictor
+  ↓                                    ↓
+FAIL probability                    defect class
+```
+
+These capabilities remain independent. v0.4 does not link SECOM observations,
+synthetic wafers, or wafer maps, and it performs no multimodal fusion or root-cause
+inference. See `docs/wafer_vision.md` for label mapping, CNN explanation, preprocessing,
+confidence bands, and limitations.

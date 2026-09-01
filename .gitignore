@@ -19,3 +19,11 @@ models/process/*
 !models/process/.gitkeep
 reports/process_model/*
 !reports/process_model/.gitkeep
+data/raw/wafer_maps/*
+!data/raw/wafer_maps/.gitkeep
+data/processed/wafer_maps/*
+!data/processed/wafer_maps/.gitkeep
+models/vision/*
+!models/vision/.gitkeep
+reports/vision_model/*
+!reports/vision_model/.gitkeep
