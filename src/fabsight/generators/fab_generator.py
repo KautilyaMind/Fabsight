@@ -1,7 +1,7 @@
 """Generate the deterministic FabSight v0.1 synthetic fab dataset.
 
 All entities are fictional educational simulation data. They do not represent
-Micron equipment, products, recipes, alarms, or operating procedures.
+equipment, products, recipes, alarms, or procedures from a real manufacturer.
 """
 
 from __future__ import annotations

@@ -9,3 +9,9 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/raw/secom/
+data/raw/secom/*
+!data/raw/secom/.gitkeep
+!data/processed/secom/
+data/processed/secom/*
+!data/processed/secom/.gitkeep

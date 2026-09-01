@@ -2,8 +2,8 @@
 
 FabSight v0.1 contains **synthetic educational simulation data**. It is a small,
 simplified model for learning data engineering concepts around semiconductor
-manufacturing. It does not reproduce Micron data, recipes, tools, sensor definitions,
-alarms, or standard operating procedures.
+manufacturing. It does not reproduce data, recipes, tools, sensor definitions,
+alarms, or standard operating procedures from a real manufacturer.
 
 ```text
 LOT

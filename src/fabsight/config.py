@@ -8,6 +8,8 @@ NUMBER_OF_TOOLS = 12
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SYNTHETIC_DATA_DIR = PROJECT_ROOT / "data" / "synthetic"
+SECOM_RAW_DIR = PROJECT_ROOT / "data" / "raw" / "secom"
+SECOM_PROCESSED_DIR = PROJECT_ROOT / "data" / "processed" / "secom"
 
 DATASET_FILES = (
     "tools.csv",
