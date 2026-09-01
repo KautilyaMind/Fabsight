@@ -7,9 +7,10 @@ from fabsight.knowledge.retriever import KnowledgeRetriever
 from fabsight.rag.rag_chain import RAGChain
 
 class AgentTools:
-    def __init__(self, retriever: KnowledgeRetriever | None = None, rag_chain: RAGChain | None = None) -> None:
+    def __init__(self, retriever: KnowledgeRetriever | None = None, rag_chain: RAGChain | None = None, rca_predictor: Any | None = None) -> None:
         self.retriever=retriever
         self.rag_chain=rag_chain
+        self.rca_predictor=rca_predictor
     def analyze_process(self, case: ManufacturingCase, sample: Any | None = None, predictor: Any | None = None) -> dict[str, Any]:
         if sample is not None:
             if predictor is None:
@@ -26,6 +27,13 @@ class AgentTools:
             return predictor.predict(wafer_map)
         v=case.vision_evidence
         return {"defect_class":v.defect_class,"confidence":v.confidence,"confidence_level":v.confidence_level,"top_predictions":v.top_predictions,"provenance":{"data":v.data_source_type,"prediction":v.prediction_source_type}}
+    def analyze_telemetry(self,case:ManufacturingCase)->dict[str,Any]:
+        evidence=case.telemetry_evidence
+        if evidence is None: raise ValueError("Synthetic telemetry is not attached to this case.")
+        if evidence.rca_prediction is None: raise ValueError("RCA prediction is not attached to this telemetry evidence.")
+        forbidden={"ground_truth_cause","scenario","ground_truth_provenance"}&set(evidence.rca_prediction)
+        if forbidden: raise ValueError("Ground-truth fields are forbidden in agent telemetry evidence.")
+        return {"run_id":evidence.run_id,"trend_summary":evidence.trend_summary or {},"rca_prediction":evidence.rca_prediction,"source_type":"SYNTHETIC_TELEMETRY","prediction_source_type":"MODEL_OUTPUT","simulation_only":True}
     def get_equipment_context(self, case: ManufacturingCase) -> dict[str, Any]:
         e=case.equipment_context
         severities=[str(a.get("severity","UNKNOWN")) for a in e.recent_alarms]

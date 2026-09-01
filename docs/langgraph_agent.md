@@ -17,12 +17,14 @@ flowchart TD
     plan_investigation --> router{next_action}
     router --> analyze_process
     router --> analyze_vision
+    router --> analyze_telemetry
     router --> check_equipment
     router --> retrieve_knowledge
     router --> review_evidence
     router --> generate_final_report
     analyze_process --> plan_investigation
     analyze_vision --> plan_investigation
+    analyze_telemetry --> plan_investigation
     check_equipment --> plan_investigation
     retrieve_knowledge --> plan_investigation
     review_evidence --> sufficient{useful summary possible?}
@@ -41,6 +43,7 @@ Tools remain specialists:
 
 - `analyze_process` wraps `ProcessPredictor` or reads its already-recorded case output.
 - `analyze_wafer` wraps `WaferPredictor` or reads its already-recorded case output.
+- `analyze_telemetry` uses inference-only named synthetic telemetry and `RCAPredictor` output; evaluation ground truth is forbidden.
 - `get_equipment_context` queries the case's synthetic fab context.
 - `retrieve_knowledge` wraps `KnowledgeRetriever`.
 - `grounded_explanation` reuses the v0.7 `RAGChain` near finalization.

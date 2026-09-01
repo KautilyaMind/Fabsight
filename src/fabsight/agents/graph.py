@@ -14,10 +14,10 @@ from fabsight.rag.llm_client import LLMClient
 def build_investigation_graph(tools:AgentTools|None=None,planner_llm:LLMClient|None=None,final_synthesizer:Callable[[Any],dict[str,Any]]|None=None):
     nodes=AgentNodes(tools or AgentTools(),InvestigationPlanner(planner_llm),final_synthesizer)
     graph=StateGraph(InvestigationState)
-    for name,fn in (("load_case",nodes.load_case),("plan_investigation",nodes.plan_investigation),("analyze_process",nodes.analyze_process),("analyze_vision",nodes.analyze_vision),("check_equipment",nodes.check_equipment),("retrieve_knowledge",nodes.retrieve_knowledge),("review_evidence",nodes.review_evidence),("generate_final_report",nodes.generate_final_report)): graph.add_node(name,fn)
+    for name,fn in (("load_case",nodes.load_case),("plan_investigation",nodes.plan_investigation),("analyze_process",nodes.analyze_process),("analyze_vision",nodes.analyze_vision),("analyze_telemetry",nodes.analyze_telemetry),("check_equipment",nodes.check_equipment),("retrieve_knowledge",nodes.retrieve_knowledge),("review_evidence",nodes.review_evidence),("generate_final_report",nodes.generate_final_report)): graph.add_node(name,fn)
     graph.add_edge(START,"load_case"); graph.add_edge("load_case","plan_investigation")
     graph.add_conditional_edges("plan_investigation",route_plan,{node:node for node in ACTION_TO_NODE.values()})
-    for node in ("analyze_process","analyze_vision","check_equipment","retrieve_knowledge"): graph.add_edge(node,"plan_investigation")
+    for node in ("analyze_process","analyze_vision","analyze_telemetry","check_equipment","retrieve_knowledge"): graph.add_edge(node,"plan_investigation")
     graph.add_conditional_edges("review_evidence",route_review,{"plan_investigation":"plan_investigation","generate_final_report":"generate_final_report"})
     graph.add_edge("generate_final_report",END)
     return graph.compile()

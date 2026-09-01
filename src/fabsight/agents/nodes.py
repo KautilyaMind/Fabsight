@@ -17,7 +17,7 @@ class AgentNodes:
     def load_case(self,state:InvestigationState)->dict[str,Any]:
         case=state["case_data"]
         if case.case_id!=state["case_id"]: raise ValueError("Requested case ID does not match loaded case.")
-        return {"process_evidence":None,"vision_evidence":None,"equipment_evidence":None,"knowledge_evidence":[],"attempted_tools":[],"evidence_gaps":[],"evidence_conflicts":[],"confidence":"LOW","evidence_sufficient":False,"iteration_count":0,"final_report":None,"provenance":case.provenance.to_dict(),"trace":["load_case"]}
+        return {"process_evidence":None,"vision_evidence":None,"telemetry_evidence":None,"rca_evidence":None,"equipment_evidence":None,"knowledge_evidence":[],"attempted_tools":[],"evidence_gaps":[],"evidence_conflicts":[],"confidence":"LOW","evidence_sufficient":False,"iteration_count":0,"final_report":None,"provenance":case.provenance.to_dict(),"trace":["load_case"]}
     def plan_investigation(self,state:InvestigationState)->dict[str,Any]:
         decision,fallback=self.planner.plan(state)
         errors=["Planner output invalid; deterministic fallback used."] if fallback else []
@@ -32,6 +32,7 @@ class AgentNodes:
         return update
     def analyze_process(self,state): return self._tool(state,"analyze_process","process_evidence",lambda:self.tools.analyze_process(state["case_data"]),lambda x:f"risk={x['risk_level']}",lambda x:f"Process model reports {x['risk_level']} risk with {x['failure_probability']:.1%} failure probability.")
     def analyze_vision(self,state): return self._tool(state,"analyze_vision","vision_evidence",lambda:self.tools.analyze_wafer(state["case_data"]),lambda x:f"pattern={x['defect_class']}",lambda x:f"Vision model reports {x['defect_class']} with {x['confidence']:.1%} confidence.")
+    def analyze_telemetry(self,state): return self._tool(state,"analyze_telemetry","rca_evidence",lambda:self.tools.analyze_telemetry(state["case_data"]),lambda x:f"predicted={x['rca_prediction']['predicted_cause']}",lambda x:f"Within the synthetic simulator, the RCA model predicts {x['rca_prediction']['predicted_cause']} with {x['rca_prediction']['confidence']:.1%} model confidence.")
     def check_equipment(self,state): return self._tool(state,"get_equipment_context","equipment_evidence",lambda:self.tools.get_equipment_context(state["case_data"]),lambda x:f"tool={x['tool_id']} alarms={x['recent_alarm_count']}",lambda x:f"Synthetic equipment context has {x['recent_alarm_count']} recent alarms and status {x['tool_status']}.")
     def retrieve_knowledge(self,state): return self._tool(state,"retrieve_knowledge","knowledge_evidence",lambda:self.tools.retrieve_knowledge(state["case_data"]),lambda x:f"chunks={len(x)}",lambda x:f"Retrieved {len(x)} technical reference chunks.")
     def review_evidence(self,state):

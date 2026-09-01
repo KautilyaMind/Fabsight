@@ -3,7 +3,7 @@ from __future__ import annotations
 import operator
 from typing import Annotated, Any, Literal, TypedDict
 
-Action = Literal["ANALYZE_PROCESS", "ANALYZE_VISION", "CHECK_EQUIPMENT", "RETRIEVE_KNOWLEDGE", "REVIEW_EVIDENCE", "FINALIZE"]
+Action = Literal["ANALYZE_PROCESS", "ANALYZE_VISION", "ANALYZE_TELEMETRY", "CHECK_EQUIPMENT", "RETRIEVE_KNOWLEDGE", "REVIEW_EVIDENCE", "FINALIZE"]
 
 class PlannerDecision(TypedDict):
     next_action: Action
@@ -30,6 +30,8 @@ class InvestigationState(TypedDict, total=False):
     case_data: Any
     process_evidence: dict[str, Any] | None
     vision_evidence: dict[str, Any] | None
+    telemetry_evidence: dict[str, Any] | None
+    rca_evidence: dict[str, Any] | None
     equipment_evidence: dict[str, Any] | None
     knowledge_evidence: list[dict[str, Any]]
     investigation_plan: PlannerDecision

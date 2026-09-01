@@ -54,3 +54,9 @@ reports/rag/*
 !reports/rag/.gitkeep
 reports/agent/*
 !reports/agent/.gitkeep
+data/synthetic/telemetry/*
+!data/synthetic/telemetry/.gitkeep
+models/rca/*
+!models/rca/.gitkeep
+reports/rca/*
+!reports/rca/.gitkeep

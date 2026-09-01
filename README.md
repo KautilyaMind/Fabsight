@@ -432,3 +432,44 @@ wafer vision, synthetic-table lookup, or semantic retrieval. Deterministic routi
 used if optional structured LLM planning fails. v0.8 has no checkpoint persistence,
 human interrupts, long-term memory, named causal telemetry, web service, dashboard,
 or deployment system. See `docs/langgraph_agent.md` for the graph and concepts.
+
+## Version v0.9 — Synthetic Named Telemetry and Explainable RCA
+
+v0.9 adds a controlled, reproducible time-series simulator with named educational
+signals and transparent synthetic fault scenarios. This system is completely separate
+from anonymous SECOM variables:
+
+```text
+SECOM → ProcessPredictor → anonymous statistical risk
+synthetic named telemetry → RCAPredictor → simulated RCA scenario
+```
+
+The simulator creates normalized run and reading tables for seven scenarios, including
+normal operation, thermal drift, pressure instability, RF-power instability, gas-flow
+deviation, tool degradation, and a sparse multi-factor anomaly. LOW, MODERATE, and HIGH
+severity control signal strength while noise creates overlap.
+
+```powershell
+python scripts/generate_telemetry.py --runs 2000
+python scripts/train_rca_model.py
+python scripts/evaluate_rca_model.py
+python scripts/inspect_telemetry_run.py --run RUN-00042
+python scripts/diagnose_telemetry_run.py --run RUN-00042
+```
+
+A class-balanced Random Forest learns 33 readable event-level features. Data is split
+at the run level to prevent time-series leakage. Synthetic ground truth is used only
+for training and evaluation; it is excluded from normal model inputs, agent state,
+prompts, RAG context, and generated reports.
+
+Manufacturing cases may optionally carry inference-only telemetry evidence. The v0.8
+planner can dynamically choose `ANALYZE_TELEMETRY`, and final reports include synthetic
+telemetry findings and a clearly scoped simulated RCA result.
+
+> Named variables, baselines, scenario relationships, and conclusions are arbitrary
+> educational simulation constructs. They are not production semiconductor-process
+> specifications, physical claims, or operating limits.
+
+See `docs/synthetic_rca.md` for schemas, scenario rules, leakage controls, model design,
+agent integration, evaluation, and limitations. v0.9 adds no human interrupts,
+checkpoints, persistent memory, web application, or deployment framework.

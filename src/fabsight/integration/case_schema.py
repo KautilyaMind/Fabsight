@@ -69,6 +69,16 @@ class IntegrationMetadata:
 
 
 @dataclass(frozen=True)
+class TelemetryEvidence:
+    run_id: str
+    source_type: str = "SYNTHETIC_TELEMETRY"
+    readings_file: str | None = None
+    rca_prediction: dict[str, Any] | None = None
+    trend_summary: dict[str, Any] | None = None
+    simulation_notice: str = "Synthetic educational telemetry; not a real production-process diagnosis."
+
+
+@dataclass(frozen=True)
 class ManufacturingCase:
     case_id: str
     created_at: str
@@ -79,6 +89,7 @@ class ManufacturingCase:
     evidence_status: str
     provenance: CaseProvenance
     integration_metadata: IntegrationMetadata
+    telemetry_evidence: TelemetryEvidence | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -96,4 +107,5 @@ class ManufacturingCase:
             evidence_status=value["evidence_status"],
             provenance=CaseProvenance(**value["provenance"]),
             integration_metadata=IntegrationMetadata(**value["integration_metadata"]),
+            telemetry_evidence=TelemetryEvidence(**value["telemetry_evidence"]) if value.get("telemetry_evidence") else None,
         )

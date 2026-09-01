@@ -18,6 +18,10 @@ class BuiltContext:
 def _case_facts(case: ManufacturingCase) -> str:
     p, v, e = case.process_evidence, case.vision_evidence, case.equipment_context
     features = ", ".join(p.top_anonymous_features[:5]) or "none listed"
+    telemetry=""
+    if case.telemetry_evidence and case.telemetry_evidence.rca_prediction:
+        prediction=case.telemetry_evidence.rca_prediction
+        telemetry=f"\nSynthetic telemetry run: {case.telemetry_evidence.run_id}\nSimulated RCA prediction: {prediction.get('predicted_cause')}\nRCA model confidence: {prediction.get('confidence',0):.1%}\nTelemetry trend summary: {case.telemetry_evidence.trend_summary or {}}\nSimulation scope: not a real production-process diagnosis"
     return f"""CASE FACTS
 Case ID: {case.case_id}
 Process step: {case.fab_context.process_step}
@@ -31,7 +35,7 @@ Evidence status: {case.evidence_status}
 Tool status: {e.tool_status}
 Recent alarm count: {e.recent_alarm_count}
 Maintenance days ago: {e.maintenance_days_ago}
-Synthetic linkage: {case.integration_metadata.linkage_notice}"""
+Synthetic linkage: {case.integration_metadata.linkage_notice}{telemetry}"""
 
 
 def build_rag_context(
