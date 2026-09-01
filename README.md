@@ -395,3 +395,40 @@ v0.7 is a fixed retrieve-then-generate pipeline, not an autonomous agent. It has
 tool-selection loop, persistent memory, automatic RCA plan, API, dashboard, or
 deployment framework. See `docs/rag_generation.md` for the complete architecture,
 configuration, security boundary, evaluation, and limitations.
+
+## Version v0.8 — LangGraph Investigation Agent
+
+v0.7 follows a fixed RAG chain. v0.8 uses an actual LangGraph `StateGraph` to choose
+the next specialist operation from current investigation state:
+
+```text
+ManufacturingCase → planner → conditional router
+    ├─ ProcessPredictor evidence
+    ├─ WaferPredictor evidence
+    ├─ synthetic equipment context
+    └─ KnowledgeRetriever evidence
+             ↓
+       evidence review
+        ↙         ↘
+ more evidence   grounded final report
+```
+
+Run one investigation:
+
+```powershell
+python scripts/investigate_case.py --case CASE-00042
+python scripts/investigate_case.py --case CASE-00042 --verbose
+python scripts/evaluate_agent.py
+```
+
+The graph accumulates provenance, observations, conflicts, errors, tool-call history,
+and a complete execution trace. Conditional edges route between small nodes, failed
+tools degrade gracefully, repeated calls are prevented, and a configurable six-tool
+iteration bound prevents infinite loops. Structured hypotheses are explicitly labeled
+and never treated as confirmed physical causes.
+
+The LLM remains a planner and evidence synthesizer; it does not replace process ML,
+wafer vision, synthetic-table lookup, or semantic retrieval. Deterministic routing is
+used if optional structured LLM planning fails. v0.8 has no checkpoint persistence,
+human interrupts, long-term memory, named causal telemetry, web service, dashboard,
+or deployment system. See `docs/langgraph_agent.md` for the graph and concepts.

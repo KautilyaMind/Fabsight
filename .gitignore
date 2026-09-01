@@ -52,3 +52,5 @@ reports/retrieval/*
 !reports/retrieval/.gitkeep
 reports/rag/*
 !reports/rag/.gitkeep
+reports/agent/*
+!reports/agent/.gitkeep
