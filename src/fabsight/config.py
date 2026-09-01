@@ -16,9 +16,15 @@ WAFER_RAW_DIR = PROJECT_ROOT / "data" / "raw" / "wafer_maps"
 WAFER_PROCESSED_DIR = PROJECT_ROOT / "data" / "processed" / "wafer_maps"
 VISION_MODEL_DIR = PROJECT_ROOT / "models" / "vision"
 VISION_REPORT_DIR = PROJECT_ROOT / "reports" / "vision_model"
+INTEGRATED_CASE_DIR = PROJECT_ROOT / "data" / "integrated" / "cases"
+MULTIMODAL_REPORT_DIR = PROJECT_ROOT / "reports" / "multimodal_cases"
 WAFER_IMAGE_SIZE = 32
 VISION_LOW_CONFIDENCE_MAX = 0.60
 VISION_HIGH_CONFIDENCE_MIN = 0.80
+DEFAULT_CASE_COUNT = 500
+CASE_CONSISTENCY_RATE = 0.70
+CASE_PAIRING_STRATEGY = "risk_pattern_consistency_v1"
+CASE_PAIRING_VERSION = "1.0"
 
 # Educational demonstration thresholds, not production process-control limits.
 FAILURE_THRESHOLD = 0.50

@@ -252,3 +252,51 @@ These capabilities remain independent. v0.4 does not link SECOM observations,
 synthetic wafers, or wafer maps, and it performs no multimodal fusion or root-cause
 inference. See `docs/wafer_vision.md` for label mapping, CNN explanation, preprocessing,
 confidence bands, and limitations.
+
+## Version v0.5 — Multimodal Case Integration
+
+v0.5 creates a common structured incident object without adding an LLM, agent, new
+model, or physical root-cause reasoning:
+
+```text
+Synthetic fab context
+        +
+Process model output
+        +
+Vision model output
+        +
+Synthetic equipment context
+        ↓
+ManufacturingCase
+```
+
+The SECOM process data and WM-811K wafer-map data are independent public datasets.
+Their relationship inside every FabSight case is explicitly synthetic and exists
+only to demonstrate multimodal software architecture. A case does not establish that
+the original records belong together or that one evidence stream caused another.
+
+Generate the default 500 reproducible cases:
+
+```powershell
+python scripts/build_multimodal_cases.py
+```
+
+Inspect and validate them:
+
+```powershell
+python scripts/inspect_case.py --case CASE-00042
+python scripts/validate_cases.py
+```
+
+Cases are written to `data/integrated/cases/cases.jsonl`, with a compact CSV alongside
+them. Summary statistics are written under `reports/multimodal_cases/`. Generated
+case and report files remain excluded from Git.
+
+The pairing policy targets 70% coherent evidence and 30% mixed evidence using the
+central random seed. This rate is configurable and intentionally permits cases such
+as high process risk with no visual pattern or low process risk with a visual pattern.
+`CONSISTENT` and `MIXED` describe evidence agreement only.
+
+Every case records provenance for synthetic context, public data, model output,
+derived fields, and the synthetic dataset linkage. See `docs/multimodal_case_model.md`
+for the complete schema, pairing behavior, provenance rules, and limitations.
