@@ -1,0 +1,8 @@
+step_id,step_order,step_name,step_category,description
+STEP-01,1,CLEAN,CLEAN,Simplified educational abstraction of the clean stage; no production recipe or proprietary procedure is represented.
+STEP-02,2,DEPOSITION,DEPOSITION,Simplified educational abstraction of the deposition stage; no production recipe or proprietary procedure is represented.
+STEP-03,3,LITHOGRAPHY,LITHO,Simplified educational abstraction of the lithography stage; no production recipe or proprietary procedure is represented.
+STEP-04,4,ETCH,ETCH,Simplified educational abstraction of the etch stage; no production recipe or proprietary procedure is represented.
+STEP-05,5,IMPLANT,IMPLANT,Simplified educational abstraction of the implant stage; no production recipe or proprietary procedure is represented.
+STEP-06,6,CMP,CMP,Simplified educational abstraction of the cmp stage; no production recipe or proprietary procedure is represented.
+STEP-07,7,INSPECTION,INSPECTION,Simplified educational abstraction of the inspection stage; no production recipe or proprietary procedure is represented.
