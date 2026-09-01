@@ -15,3 +15,7 @@ data/raw/secom/*
 !data/processed/secom/
 data/processed/secom/*
 !data/processed/secom/.gitkeep
+models/process/*
+!models/process/.gitkeep
+reports/process_model/*
+!reports/process_model/.gitkeep

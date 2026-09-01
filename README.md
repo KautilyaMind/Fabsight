@@ -137,3 +137,55 @@ The synthetic v0.1 tables and real public v0.2 measurements remain separate. v0.
 does not create fake links between SECOM observations and synthetic wafers, and it
 does not train a predictive model. See `docs/secom_overview.md` for the data meaning,
 license attribution, preprocessing rationale, and limitations.
+
+## Version v0.3 — Process Quality Prediction
+
+v0.3 adds two class-weighted SECOM baselines:
+
+- Logistic Regression as an interpretable linear baseline
+- Random Forest as a nonlinear baseline with feature importance
+
+```text
+SECOM measurements
+       ↓
+v0.2 preprocessing
+       ↓
+ML model
+       ↓
+PASS / FAIL
+       ↓
+failure probability and demonstration risk level
+```
+
+Train both models and select one using a training-only validation subset:
+
+```powershell
+python scripts/train_process_models.py
+```
+
+Evaluate both persisted models once against the untouched test set:
+
+```powershell
+python scripts/evaluate_process_models.py
+```
+
+Run reusable inference on a zero-based processed test row:
+
+```powershell
+python scripts/predict_process_sample.py --row 42
+```
+
+The predictor also accepts `--csv path/to/one_processed_row.csv`. Input must contain
+one row with the same scaled anonymous features produced by v0.2. Models are saved
+under `models/process/`; JSON, CSV, confusion matrices, ROC curves, comparison plots,
+and feature-importance reports are generated under `reports/process_model/`.
+
+Accuracy is included only for context. FAIL precision, recall, F1, ROC-AUC, and false
+negatives are emphasized because the severe class imbalance makes accuracy
+misleading. Risk thresholds are educational examples, not production process-control
+limits.
+
+SECOM variable identities remain unknown. Model coefficients and feature importance
+describe statistical reliance, not physical sensor meanings or causality. v0.1,
+v0.2, and v0.3 remain separate layers; synthetic wafers are not mapped to SECOM rows.
+See `docs/process_model.md` for the evaluation and scientific limitations.
