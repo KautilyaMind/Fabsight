@@ -300,3 +300,62 @@ as high process risk with no visual pattern or low process risk with a visual pa
 Every case records provenance for synthetic context, public data, model output,
 derived fields, and the synthetic dataset linkage. See `docs/multimodal_case_model.md`
 for the complete schema, pairing behavior, provenance rules, and limitations.
+
+## Version v0.6 — Semiconductor Knowledge Retrieval
+
+v0.6 adds a local retrieval foundation without requiring an LLM or paid API:
+
+```text
+technical documents
+      ↓
+cleaning and chunking
+      ↓
+local embeddings
+      ↓
+FAISS vector store
+      ↓
+relevant cited passages
+```
+
+Supported local formats are PDF, Markdown, and plain text. Every passage retains its
+source filename, PDF page where available, document type, metadata, and one of three
+provenance labels: `PUBLIC_REFERENCE`, `USER_PROVIDED`, or
+`SYNTHETIC_EDUCATIONAL`.
+
+Build the knowledge base from `data/knowledge/raw/`:
+
+```powershell
+python scripts/build_knowledge_base.py
+```
+
+The first build downloads `sentence-transformers/all-MiniLM-L6-v2`; later builds can
+use the local cache. No API key is required. The persisted FAISS index and metadata
+are written under `data/knowledge/processed/`.
+
+Run a raw technical search:
+
+```powershell
+python scripts/search_knowledge.py --query "what is an edge ring wafer pattern"
+```
+
+Retrieve references for a saved multimodal case:
+
+```powershell
+python scripts/retrieve_for_case.py --case CASE-00042
+```
+
+```text
+ManufacturingCase
+       ↓
+concise query builder
+       ↓
+KnowledgeRetriever
+       ↓
+relevant technical context
+```
+
+Similarity scores are ranking values, not correctness probabilities. Retrieved text
+provides potentially relevant context and never confirms a case-specific physical
+explanation. Document text is treated as untrusted data and is never executed. See
+`docs/knowledge_rag.md` for ingestion, provenance, chunking, indexing, evaluation,
+security notes, and limitations.

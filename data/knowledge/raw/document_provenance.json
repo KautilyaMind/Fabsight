@@ -1,0 +1,14 @@
+{
+  "synthetic_etch_overview.md": {
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": ["etch", "fabrication", "process_control"]
+  },
+  "synthetic_process_monitoring_guide.md": {
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": ["process_monitoring", "spc", "maintenance", "anomaly_investigation", "cmp", "lithography", "deposition"]
+  },
+  "synthetic_wafer_inspection_notes.md": {
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": ["wafer_inspection", "wafer_maps", "edge_ring", "scratch", "quality_engineering"]
+  }
+}

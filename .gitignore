@@ -5,6 +5,9 @@ __pycache__/
 venv/
 .coverage
 htmlcov/
+.env
+.env.*
+!.env.example
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
@@ -35,3 +38,15 @@ data/integrated/cases/*
 reports/multimodal_cases/*
 !reports/multimodal_cases/
 !reports/multimodal_cases/.gitkeep
+data/knowledge/raw/*
+!data/knowledge/raw/.gitkeep
+!data/knowledge/raw/document_provenance.json
+!data/knowledge/raw/synthetic_etch_overview.md
+!data/knowledge/raw/synthetic_process_monitoring_guide.md
+!data/knowledge/raw/synthetic_wafer_inspection_notes.md
+data/knowledge/processed/*
+!data/knowledge/processed/.gitkeep
+models/embeddings/*
+!models/embeddings/.gitkeep
+reports/retrieval/*
+!reports/retrieval/.gitkeep

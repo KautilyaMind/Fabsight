@@ -25,6 +25,14 @@ DEFAULT_CASE_COUNT = 500
 CASE_CONSISTENCY_RATE = 0.70
 CASE_PAIRING_STRATEGY = "risk_pattern_consistency_v1"
 CASE_PAIRING_VERSION = "1.0"
+KNOWLEDGE_RAW_DIR = PROJECT_ROOT / "data" / "knowledge" / "raw"
+KNOWLEDGE_PROCESSED_DIR = PROJECT_ROOT / "data" / "knowledge" / "processed"
+EMBEDDING_MODEL_DIR = PROJECT_ROOT / "models" / "embeddings"
+RETRIEVAL_REPORT_DIR = PROJECT_ROOT / "reports" / "retrieval"
+EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+KNOWLEDGE_CHUNK_SIZE = 1000
+KNOWLEDGE_CHUNK_OVERLAP = 150
+KNOWLEDGE_BASE_VERSION = "1.0"
 
 # Educational demonstration thresholds, not production process-control limits.
 FAILURE_THRESHOLD = 0.50
