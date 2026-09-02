@@ -473,3 +473,70 @@ telemetry findings and a clearly scoped simulated RCA result.
 See `docs/synthetic_rca.md` for schemas, scenario rules, leakage controls, model design,
 agent integration, evaluation, and limitations. v0.9 adds no human interrupts,
 checkpoints, persistent memory, web application, or deployment framework.
+
+## Version v1.0 — Human-Supervised Process Intelligence
+
+> FabSight is a synthetic educational semiconductor process-intelligence environment
+> combining public datasets with clearly labeled simulated manufacturing context. It
+> does not reproduce the manufacturing processes, control limits, recipes, or internal
+> data of any real semiconductor manufacturing company.
+
+v1.0 turns the intelligence stack into an operational portfolio application:
+
+```text
+Streamlit → FastAPI → InvestigationService → checkpointed LangGraph
+  → specialist tools → evidence review → human interrupt
+  → engineer feedback → resume → approved/rejected persisted report
+```
+
+SQLite stores investigation history, verbatim human feedback, immutable report
+revisions, and structured audit events. A separate LangGraph SQLite checkpointer stores
+the graph position and state under a stable `INV-######` thread ID, allowing a review
+to resume after application restart.
+
+Install and run locally:
+
+```powershell
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env
+python scripts/run_api.py
+python scripts/run_ui.py
+```
+
+Open `http://localhost:8501`. API documentation is available at
+`http://localhost:8000/docs`.
+
+Run with containers:
+
+```powershell
+docker compose up --build
+```
+
+The UI provides an overview, case explorer, persistent investigation list, actual
+graph progress, human-review controls, structured final reports, audit history, and
+subsystem status. `AI_GENERATED`, `APPROVED`, and `REJECTED` remain visibly distinct.
+
+Security boundaries include environment-only secrets, `.dockerignore`, validated API
+schemas, sanitized HTTP errors, no arbitrary upload endpoint, untrusted-document
+boundaries, no shell execution from model output, and no ground-truth exposure.
+
+Complete documentation:
+
+- `docs/architecture.md` — system structure and data lineage
+- `docs/human_in_the_loop.md` — interrupts, feedback, and approval
+- `docs/deployment.md` — local and Docker operation
+- `docs/demo_guide.md` — restart/resume portfolio walkthrough
+
+Project evolution:
+
+```text
+v0.1 synthetic fab → v0.2 public process data → v0.3 process ML
+→ v0.4 wafer vision → v0.5 multimodal cases → v0.6 retrieval
+→ v0.7 grounded RAG → v0.8 LangGraph agent → v0.9 synthetic RCA
+→ v1.0 persistent human-supervised application
+```
+
+FabSight remains educational: public process variables are anonymous; public process
+and wafer datasets are independent; their linkage is synthetic; named telemetry is
+simulated; generic references do not establish production causality; AI hypotheses
+require human review; and the system is not intended for production process control.

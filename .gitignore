@@ -60,3 +60,7 @@ models/rca/*
 !models/rca/.gitkeep
 reports/rca/*
 !reports/rca/.gitkeep
+data/database/*
+!data/database/.gitkeep
+reports/v1_evaluation/*
+!reports/v1_evaluation/.gitkeep

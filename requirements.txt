@@ -10,3 +10,7 @@ sentence-transformers>=3.0,<6.0
 faiss-cpu>=1.8,<2.0
 pypdf>=5.0,<7.0
 langgraph>=0.6,<2.0
+langgraph-checkpoint-sqlite>=3.0,<4.0
+fastapi>=0.116,<1.0
+uvicorn>=0.35,<1.0
+streamlit>=1.48,<2.0

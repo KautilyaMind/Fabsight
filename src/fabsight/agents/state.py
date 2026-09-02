@@ -26,6 +26,7 @@ class Hypothesis(TypedDict):
     provenance: Literal["DERIVED"]
 
 class InvestigationState(TypedDict, total=False):
+    investigation_id: str
     case_id: str
     case_data: Any
     process_evidence: dict[str, Any] | None
@@ -50,3 +51,9 @@ class InvestigationState(TypedDict, total=False):
     trace: Annotated[list[str], operator.add]
     errors: Annotated[list[str], operator.add]
     provenance: dict[str, Any]
+    current_node: str
+    status: str
+    human_feedback: Annotated[list[dict[str, Any]], operator.add]
+    approval_status: str
+    created_at: str
+    updated_at: str

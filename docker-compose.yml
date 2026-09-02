@@ -1,0 +1,12 @@
+services:
+  fabsight-api:
+    build: .
+    env_file: [.env]
+    ports: ["8000:8000"]
+    volumes: ["./data/database:/app/data/database", "./data/knowledge/processed:/app/data/knowledge/processed", "./models:/app/models", "./reports:/app/reports"]
+  fabsight-ui:
+    build: .
+    command: ["python","scripts/run_ui.py"]
+    environment: ["FABSIGHT_API_URL=http://fabsight-api:8000"]
+    ports: ["8501:8501"]
+    depends_on: [fabsight-api]
