@@ -3,8 +3,7 @@ import os,requests,streamlit as st
 API=os.getenv("FABSIGHT_API_URL","http://localhost:8000")
 st.set_page_config(page_title="FabSight",layout="wide")
 st.title("FabSight")
-st.subheader("Synthetic Semiconductor Process Intelligence")
-st.info("Educational simulation. No proprietary semiconductor manufacturing data is used.")
+st.subheader("Enterprise Adaptable Synthetic Semiconductor Process Intelligence")
 page=st.sidebar.radio("Explore",["Overview","Case Explorer","Investigations","Human Review","Final Report","Audit Trail","System Information"])
 def get(path):
  r=requests.get(API+path,timeout=30); r.raise_for_status(); return r.json()
@@ -32,3 +31,4 @@ try:
   items=get("/investigations"); iid=st.selectbox("Investigation",[x["investigation_id"] for x in items]); st.dataframe(get(f"/investigations/{iid}/audit"),use_container_width=True)
  else:st.json(get("/health")); st.write("Subsystem readiness is available from application startup checks. Configuration values and secrets are never displayed.")
 except requests.RequestException as exc:st.error("FabSight API is unavailable or returned a sanitized error.")
+st.caption(r"\* Notice: Educational simulation. No proprietary semiconductor manufacturing data is used.")
