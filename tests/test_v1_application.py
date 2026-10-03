@@ -39,7 +39,7 @@ def test_invalid_feedback_and_case_are_clear(tmp_path):
  else:raise AssertionError
  s.close()
 def test_api_endpoints(tmp_path):
- s=make_service(tmp_path);app.state.service=s;client=TestClient(app);health=client.get("/health").json();assert health["version"]=="1.0" and "subsystems" in health;assert client.get("/cases").status_code==200
+ s=make_service(tmp_path);app.state.service=s;client=TestClient(app);health=client.get("/health").json();assert health["version"]=="1.1" and "subsystems" in health;assert client.get("/cases").status_code==200
  created=client.post("/investigations",json={"case_id":"CASE-00001"});assert created.status_code==201;iid=created.json()["investigation_id"]
  assert client.post(f"/investigations/{iid}/run").json()["status"]=="WAITING_FOR_HUMAN";assert client.post(f"/investigations/{iid}/feedback",json={"action":"APPROVE","comment":"ok"}).json()["status"]=="COMPLETED";assert client.get(f"/investigations/{iid}/report").status_code==200;assert client.get(f"/investigations/{iid}/audit").json();assert client.get("/cases/bad").status_code==404;s.close()
 def test_ground_truth_and_secrets_absent(tmp_path):

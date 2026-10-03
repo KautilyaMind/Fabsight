@@ -5,7 +5,7 @@ from api.schemas import FeedbackRequest,InvestigationCreate
 from fabsight.services import InvestigationService
 from fabsight.services.health import startup_status
 
-app=FastAPI(title="FabSight API",version="1.0.0",description="Synthetic educational process-intelligence application")
+app=FastAPI(title="FabSight API",version="1.1.0",description="Synthetic educational process-intelligence application")
 def service(request:Request)->InvestigationService:
  if not hasattr(request.app.state,"service"):request.app.state.service=InvestigationService()
  return request.app.state.service

@@ -540,3 +540,29 @@ FabSight remains educational: public process variables are anonymous; public pro
 and wafer datasets are independent; their linkage is synthetic; named telemetry is
 simulated; generic references do not establish production causality; AI hypotheses
 require human review; and the system is not intended for production process control.
+
+## Version v1.1 — Cloud Deployment Readiness
+
+v1.1 packages the small generated demo bundle needed by a fresh cloud checkout and
+separates the deployment into a lightweight Streamlit Community Cloud frontend and a
+Docker-hosted FastAPI backend. The backend now honors the platform-provided `PORT`,
+supports configurable persistent database and vector-index paths, exposes v1.1 health
+status, and retains the existing human-supervised investigation workflow.
+
+Deploy Streamlit with:
+
+```text
+Repository: KautilyaMind/Fabsight
+Branch: master
+Main file path: app/streamlit_app.py
+```
+
+Set `FABSIGHT_API_URL` in Streamlit Cloud secrets to the HTTPS address of the deployed
+FastAPI service. Keep `GOOGLE_API_KEY` only on the backend. See
+`docs/deployment.md` for Docker, persistent storage, health checks, cloud secrets, and
+the end-to-end deployment test.
+
+```text
+v1.0 persistent human-supervised application
+-> v1.1 cloud-deployable frontend/backend application
+```

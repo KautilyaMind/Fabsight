@@ -1,0 +1,270 @@
+{
+  "dataset": "public WM-811K wafer-map dataset",
+  "training_timestamp_utc": "2026-09-01T08:32:28.402151+00:00",
+  "classes": [
+    "CENTER",
+    "DONUT",
+    "EDGE_LOCAL",
+    "EDGE_RING",
+    "LOCAL",
+    "NEAR_FULL",
+    "NONE",
+    "RANDOM",
+    "SCRATCH"
+  ],
+  "image_dimensions": [
+    32,
+    32
+  ],
+  "random_seed": 42,
+  "architecture": "Conv2d(1,16)-ReLU-Pool-Conv2d(16,32)-ReLU-Pool-AdaptivePool-Dense(64)-Softmax",
+  "class_weighting": {
+    "CENTER": 0.709047619047619,
+    "DONUT": 2.551842330762639,
+    "EDGE_LOCAL": 0.709047619047619,
+    "EDGE_RING": 0.709047619047619,
+    "LOCAL": 0.709047619047619,
+    "NEAR_FULL": 9.544871794871796,
+    "NONE": 0.709047619047619,
+    "RANDOM": 1.638063806380638,
+    "SCRATCH": 1.1888223552894213
+  },
+  "epochs_requested": 8,
+  "best_validation_macro_f1": 0.6129298964341918,
+  "training_history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.0804459077971322,
+      "validation_loss": 1.7279065211613973,
+      "train_accuracy": 0.21155137676292815,
+      "validation_accuracy": 0.45454545454545453,
+      "validation_macro_f1": 0.3479016523602488
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.3981729694775173,
+      "validation_loss": 1.1996093273162842,
+      "train_accuracy": 0.41739422431161854,
+      "validation_accuracy": 0.4587251828631139,
+      "validation_macro_f1": 0.4749701675297611
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.14935485465186,
+      "validation_loss": 1.1400385697682698,
+      "train_accuracy": 0.48041190955898816,
+      "validation_accuracy": 0.4592476489028213,
+      "validation_macro_f1": 0.5107198768881238
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.0838837342602865,
+      "validation_loss": 1.1009562651316325,
+      "train_accuracy": 0.5088426236847996,
+      "validation_accuracy": 0.5235109717868338,
+      "validation_macro_f1": 0.5588905968234036
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.024838329213006,
+      "validation_loss": 1.0374647855758667,
+      "train_accuracy": 0.5241773002014775,
+      "validation_accuracy": 0.5344827586206896,
+      "validation_macro_f1": 0.5862495289521416
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.9905355981418065,
+      "validation_loss": 1.0006755669911702,
+      "train_accuracy": 0.5475710767853146,
+      "validation_accuracy": 0.5219435736677116,
+      "validation_macro_f1": 0.567409851784565
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.9627624554293496,
+      "validation_loss": 0.9308326601982116,
+      "train_accuracy": 0.5471233490038057,
+      "validation_accuracy": 0.571055381400209,
+      "validation_macro_f1": 0.6129298964341918
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.9268743574619294,
+      "validation_loss": 0.9694972078005473,
+      "train_accuracy": 0.5667114394448175,
+      "validation_accuracy": 0.5350052246603971,
+      "validation_macro_f1": 0.5346245505437739
+    }
+  ],
+  "test_metrics": {
+    "accuracy": 0.5827676240208878,
+    "macro_precision": 0.6321311436462196,
+    "macro_recall": 0.6556455473807564,
+    "macro_f1": 0.6306466643575704,
+    "weighted_f1": 0.5864188043670289,
+    "per_class": {
+      "CENTER": {
+        "precision": 0.8744769874476988,
+        "recall": 0.6966666666666667,
+        "f1": 0.7755102040816326,
+        "support": 300
+      },
+      "DONUT": {
+        "precision": 0.4625,
+        "recall": 0.891566265060241,
+        "f1": 0.6090534979423868,
+        "support": 83
+      },
+      "EDGE_LOCAL": {
+        "precision": 0.5515873015873016,
+        "recall": 0.4633333333333333,
+        "f1": 0.5036231884057971,
+        "support": 300
+      },
+      "EDGE_RING": {
+        "precision": 0.9214285714285714,
+        "recall": 0.86,
+        "f1": 0.8896551724137931,
+        "support": 300
+      },
+      "LOCAL": {
+        "precision": 0.43010752688172044,
+        "recall": 0.26666666666666666,
+        "f1": 0.3292181069958848,
+        "support": 300
+      },
+      "NEAR_FULL": {
+        "precision": 0.9583333333333334,
+        "recall": 1.0,
+        "f1": 0.9787234042553191,
+        "support": 23
+      },
+      "NONE": {
+        "precision": 0.4137055837563452,
+        "recall": 0.5433333333333333,
+        "f1": 0.4697406340057637,
+        "support": 300
+      },
+      "RANDOM": {
+        "precision": 0.8320610687022901,
+        "recall": 0.8384615384615385,
+        "f1": 0.8352490421455939,
+        "support": 130
+      },
+      "SCRATCH": {
+        "precision": 0.24497991967871485,
+        "recall": 0.3407821229050279,
+        "f1": 0.2850467289719626,
+        "support": 179
+      }
+    },
+    "confusion_matrix": [
+      [
+        209,
+        23,
+        4,
+        1,
+        20,
+        0,
+        26,
+        4,
+        13
+      ],
+      [
+        2,
+        74,
+        1,
+        0,
+        3,
+        0,
+        0,
+        3,
+        0
+      ],
+      [
+        3,
+        6,
+        139,
+        18,
+        14,
+        0,
+        84,
+        9,
+        27
+      ],
+      [
+        0,
+        0,
+        27,
+        258,
+        1,
+        0,
+        5,
+        0,
+        9
+      ],
+      [
+        15,
+        42,
+        32,
+        0,
+        80,
+        0,
+        57,
+        1,
+        73
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        23,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        33,
+        0,
+        34,
+        0,
+        163,
+        2,
+        66
+      ],
+      [
+        4,
+        15,
+        1,
+        0,
+        0,
+        1,
+        0,
+        109,
+        0
+      ],
+      [
+        4,
+        0,
+        15,
+        3,
+        34,
+        0,
+        59,
+        3,
+        61
+      ]
+    ]
+  },
+  "limitations": [
+    "Defect classes describe spatial patterns, not physical root causes.",
+    "The public dataset may not represent every production environment.",
+    "This educational model is not suitable for production quality-control decisions.",
+    "No proprietary semiconductor manufacturing data is used."
+  ]
+}

@@ -1,5 +1,6 @@
 """Shared configuration for FabSight data and modeling workflows."""
 
+import os
 from pathlib import Path
 
 RANDOM_SEED = 42
@@ -7,6 +8,14 @@ NUMBER_OF_LOTS = 100
 NUMBER_OF_TOOLS = 12
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+def _env_path(name: str, default: Path) -> Path:
+    raw = os.getenv(name, "").strip()
+    if not raw:
+        return default
+    value = Path(raw).expanduser()
+    return value if value.is_absolute() else PROJECT_ROOT / value
+
 SYNTHETIC_DATA_DIR = PROJECT_ROOT / "data" / "synthetic"
 SECOM_RAW_DIR = PROJECT_ROOT / "data" / "raw" / "secom"
 SECOM_PROCESSED_DIR = PROJECT_ROOT / "data" / "processed" / "secom"
@@ -26,7 +35,7 @@ CASE_CONSISTENCY_RATE = 0.70
 CASE_PAIRING_STRATEGY = "risk_pattern_consistency_v1"
 CASE_PAIRING_VERSION = "1.0"
 KNOWLEDGE_RAW_DIR = PROJECT_ROOT / "data" / "knowledge" / "raw"
-KNOWLEDGE_PROCESSED_DIR = PROJECT_ROOT / "data" / "knowledge" / "processed"
+KNOWLEDGE_PROCESSED_DIR = _env_path("VECTOR_STORE_PATH", PROJECT_ROOT / "data" / "knowledge" / "processed")
 EMBEDDING_MODEL_DIR = PROJECT_ROOT / "models" / "embeddings"
 RETRIEVAL_REPORT_DIR = PROJECT_ROOT / "reports" / "retrieval"
 RAG_REPORT_DIR = PROJECT_ROOT / "reports" / "rag"
@@ -35,9 +44,9 @@ MAX_INVESTIGATION_ITERATIONS = 6
 TELEMETRY_DATA_DIR = SYNTHETIC_DATA_DIR / "telemetry"
 RCA_MODEL_DIR = PROJECT_ROOT / "models" / "rca"
 RCA_REPORT_DIR = PROJECT_ROOT / "reports" / "rca"
-DATABASE_DIR = PROJECT_ROOT / "data" / "database"
-FAB_DB_PATH = DATABASE_DIR / "fabsight.db"
-CHECKPOINT_DB_PATH = DATABASE_DIR / "checkpoints.db"
+DATABASE_DIR = _env_path("FABSIGHT_DATABASE_DIR", PROJECT_ROOT / "data" / "database")
+FAB_DB_PATH = _env_path("FAB_DB_PATH", DATABASE_DIR / "fabsight.db")
+CHECKPOINT_DB_PATH = _env_path("CHECKPOINT_DB_PATH", DATABASE_DIR / "checkpoints.db")
 VISION_REVIEW_THRESHOLD = 0.60
 RCA_REVIEW_THRESHOLD = 0.55
 REQUIRE_FINAL_APPROVAL = True

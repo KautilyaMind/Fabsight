@@ -20,6 +20,8 @@ data/processed/secom/*
 !data/processed/secom/.gitkeep
 models/process/*
 !models/process/.gitkeep
+!models/process/selected_model.joblib
+!models/process/model_metadata.json
 reports/process_model/*
 !reports/process_model/.gitkeep
 data/raw/wafer_maps/*
@@ -30,11 +32,14 @@ data/processed/wafer_maps/*
 !data/processed/wafer_maps/.gitkeep
 models/vision/*
 !models/vision/.gitkeep
+!models/vision/wafer_cnn.pt
+!models/vision/vision_model_metadata.json
 reports/vision_model/*
 !reports/vision_model/.gitkeep
 data/integrated/cases/*
 !data/integrated/cases/
 !data/integrated/cases/.gitkeep
+!data/integrated/cases/cases.jsonl
 reports/multimodal_cases/*
 !reports/multimodal_cases/
 !reports/multimodal_cases/.gitkeep
@@ -46,6 +51,9 @@ data/knowledge/raw/*
 !data/knowledge/raw/synthetic_wafer_inspection_notes.md
 data/knowledge/processed/*
 !data/knowledge/processed/.gitkeep
+!data/knowledge/processed/chunks.jsonl
+!data/knowledge/processed/index_metadata.json
+!data/knowledge/processed/knowledge.index
 models/embeddings/*
 !models/embeddings/.gitkeep
 reports/retrieval/*
@@ -58,6 +66,8 @@ data/synthetic/telemetry/*
 !data/synthetic/telemetry/.gitkeep
 models/rca/*
 !models/rca/.gitkeep
+!models/rca/rca_model.joblib
+!models/rca/rca_model_metadata.json
 reports/rca/*
 !reports/rca/.gitkeep
 data/database/*

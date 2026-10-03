@@ -1,0 +1,18 @@
+{
+  "knowledge_base_version": "1.0",
+  "build_timestamp_utc": "2026-09-01T10:20:18.427458+00:00",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "vector_store": "FAISS IndexFlatIP",
+  "similarity": "inner product over normalized embeddings (cosine-style score)",
+  "chunk_size_characters": 1000,
+  "chunk_overlap_characters": 150,
+  "documents_found": 3,
+  "documents_loaded": 3,
+  "document_units_loaded": 3,
+  "unsupported_files_skipped": [],
+  "chunks_created": 6,
+  "embedding_dimensions": 384,
+  "source_type_counts": {
+    "SYNTHETIC_EDUCATIONAL": 6
+  }
+}

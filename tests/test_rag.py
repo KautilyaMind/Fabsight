@@ -29,7 +29,7 @@ def settings(**kw):
     values={"provider":"google","model":"gemini-3.5-flash-lite","api_key":"test","top_k":5,"max_context_chars":12000,"max_chunk_chars":3000}
     values.update(kw); return LLMSettings(**values)
 def test_configuration_loads_google_alias(tmp_path, monkeypatch):
-    monkeypatch.delenv("LLM_API_KEY", raising=False); monkeypatch.delenv("LLM_MODEL", raising=False)
+    monkeypatch.delenv("LLM_API_KEY", raising=False); monkeypatch.delenv("GOOGLE_API_KEY", raising=False); monkeypatch.delenv("LLM_MODEL", raising=False)
     env=tmp_path/".env"; env.write_text("LLM_PROVIDER=google\nLLM_MODEL=test-model\nGOOGLE_API_KEY=secret\n")
     loaded=LLMSettings.from_env(env_file=env); assert (loaded.provider,loaded.model,loaded.api_key)==("google","test-model","secret")
 def test_missing_api_key_is_clear():
