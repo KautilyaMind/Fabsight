@@ -40,11 +40,23 @@ def test_deployment_bundle_is_complete():
         assert health["subsystems"][subsystem] == "READY"
 
 
-def test_streamlit_uses_small_dependency_set():
+def test_streamlit_cloud_uses_direct_service_and_complete_dependency_set():
     requirements = (ROOT / "app" / "requirements.txt").read_text(encoding="utf-8").lower()
-    assert "streamlit" in requirements and "requests" in requirements
-    for heavyweight in ("torch", "sentence-transformers", "faiss", "langgraph", "fastapi"):
-        assert heavyweight not in requirements
+    ui = (ROOT / "app" / "streamlit_app.py").read_text(encoding="utf-8")
+    assert "create_cloud_service" in ui and "@st.cache_resource" in ui
+    assert "FABSIGHT_API_URL" not in ui and "requests.get" not in ui and "requests.post" not in ui
+    for runtime in ("torch", "sentence-transformers", "faiss", "langgraph", "langgraph-checkpoint-postgres", "psycopg", "streamlit"):
+        assert runtime in requirements
+    assert "fastapi" not in requirements
+
+
+def test_cloud_profile_has_postgres_implementation_and_instructions():
+    store = (ROOT / "src" / "fabsight" / "database" / "postgres_store.py").read_text(encoding="utf-8")
+    checkpoint = (ROOT / "src" / "fabsight" / "agents" / "persistence.py").read_text(encoding="utf-8")
+    instructions = (ROOT / "docs" / "streamlit_cloud.md").read_text(encoding="utf-8")
+    assert "ConnectionPool" in store
+    assert "PostgresSaver" in checkpoint
+    assert "DATABASE_URL" in instructions and "app/streamlit_app.py" in instructions
 
 
 def test_container_uses_api_dependency_set_and_excludes_training_data():

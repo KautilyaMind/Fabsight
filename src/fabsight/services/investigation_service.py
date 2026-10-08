@@ -13,9 +13,12 @@ from fabsight.database import InvestigationStore
 from fabsight.integration.io import load_cases
 
 class InvestigationService:
- def __init__(self,db_path:Path=FAB_DB_PATH,checkpoint_path:Path=CHECKPOINT_DB_PATH,agent_factory:Callable[[],Any]|None=None,cases_path:Path|None=None,require_final_approval:bool=REQUIRE_FINAL_APPROVAL):
-  self.store=InvestigationStore(db_path); self.checkpoints=CheckpointStore(checkpoint_path); self.cases_path=cases_path or INTEGRATED_CASE_DIR/"cases.jsonl"; self.agent_factory=agent_factory or InvestigationAgent; self.graph=build_operational_graph(self._run_agent,self.checkpoints.saver,require_final_approval)
- def close(self):self.checkpoints.close()
+ def __init__(self,db_path:Path=FAB_DB_PATH,checkpoint_path:Path=CHECKPOINT_DB_PATH,agent_factory:Callable[[],Any]|None=None,cases_path:Path|None=None,require_final_approval:bool=REQUIRE_FINAL_APPROVAL,store:Any|None=None,checkpoint_store:Any|None=None):
+  self.store=store or InvestigationStore(db_path); self.checkpoints=checkpoint_store or CheckpointStore(checkpoint_path); self.cases_path=cases_path or INTEGRATED_CASE_DIR/"cases.jsonl"; self.agent_factory=agent_factory or InvestigationAgent; self.graph=build_operational_graph(self._run_agent,self.checkpoints.saver,require_final_approval)
+ def close(self):
+  self.checkpoints.close()
+  close=getattr(self.store,"close",None)
+  if close:close()
  def cases(self):return load_cases(self.cases_path)
  def case(self,case_id):
   case=next((x for x in self.cases() if x.case_id==case_id),None)
