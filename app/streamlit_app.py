@@ -9,6 +9,7 @@ sys.path[:0]=[str(ROOT),str(ROOT/"src")]
 from fabsight.services import InvestigationService  # noqa:E402
 from fabsight.services.cloud import create_cloud_service  # noqa:E402
 from fabsight.services.health import startup_status  # noqa:E402
+from app.report_view import render_report  # noqa:E402
 
 st.set_page_config(page_title="FabSight",layout="wide")
 
@@ -50,8 +51,7 @@ try:
  elif page=="Final Report":
   items=records();iid=selected_id(items)
   if iid:
-   st.warning("AI-generated and engineer approval are separate states.")
-   try:st.json(app.report(iid))
+   try:render_report(app.report(iid))
    except KeyError:st.info("The report is available after the investigation and human-review workflow completes.")
   else:st.info("Start an investigation first.")
  elif page=="Audit Trail":

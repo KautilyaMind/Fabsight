@@ -51,6 +51,16 @@ def test_streamlit_cloud_uses_direct_service_and_complete_dependency_set():
     assert "fastapi" not in requirements
 
 
+def test_final_report_has_interviewer_view_and_raw_download():
+    ui = (ROOT / "app" / "streamlit_app.py").read_text(encoding="utf-8")
+    presenter = (ROOT / "app" / "report_view.py").read_text(encoding="utf-8")
+    assert "render_report(app.report(iid))" in ui
+    for heading in ("Executive summary", "Evidence findings", "Investigation hypotheses", "Recommended next investigation steps", "Limitations and uncertainty"):
+        assert heading in presenter
+    assert "Technical details and raw report data" in presenter
+    assert "Download report JSON" in presenter
+
+
 def test_cloud_profile_has_postgres_implementation_and_instructions():
     store = (ROOT / "src" / "fabsight" / "database" / "postgres_store.py").read_text(encoding="utf-8")
     checkpoint = (ROOT / "src" / "fabsight" / "agents" / "persistence.py").read_text(encoding="utf-8")
