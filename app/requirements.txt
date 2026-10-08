@@ -1,4 +1,4 @@
-# FabSight Streamlit Cloud runtime (revision 2)
+# FabSight Streamlit Cloud runtime (revision 3)
 pandas>=2.0,<3.0
 numpy>=1.24,<3.0
 requests>=2.31,<3.0
