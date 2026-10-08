@@ -61,7 +61,5 @@ try:
  else:
   health=startup_status();health["deployment"]="streamlit-postgres" if cloud_mode else "local-sqlite";health["subsystems"]["application_database"]="READY";health["subsystems"]["checkpoint_database"]="READY";st.json(health);st.write("Configuration values and secrets are never displayed.")
 except (KeyError,ValueError) as exc:st.error(str(exc).strip("'"))
-except Exception as exc:
- detail=str(exc) if isinstance(exc,TypeError) else type(exc).__name__
- st.error(f"FabSight could not complete this operation. Diagnostic: {detail}")
+except Exception:st.error("FabSight could not complete this operation. Check the deployment logs for details.")
 st.caption(r"\* Notice: Educational simulation. No proprietary semiconductor manufacturing data is used.")
