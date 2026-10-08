@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import sys
+import types
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,6 +58,33 @@ def test_cloud_profile_has_postgres_implementation_and_instructions():
     assert "ConnectionPool" in store
     assert "PostgresSaver" in checkpoint
     assert "DATABASE_URL" in instructions and "app/streamlit_app.py" in instructions
+
+
+def test_postgres_reads_configure_dictionary_rows_on_cursor(monkeypatch):
+    from fabsight.database.postgres_store import PostgresInvestigationStore
+
+    marker = object()
+    rows_module = types.ModuleType("psycopg.rows")
+    rows_module.dict_row = marker
+    monkeypatch.setitem(sys.modules, "psycopg.rows", rows_module)
+
+    class Cursor:
+        def __enter__(self): return self
+        def __exit__(self, *_): pass
+        def execute(self, query, params): self.executed = (query, params)
+        def fetchall(self): return [{"investigation_id": "INV-000001"}]
+    class Connection:
+        def __enter__(self): return self
+        def __exit__(self, *_): pass
+        def cursor(self, row_factory=None):
+            assert row_factory is marker
+            return Cursor()
+    class Pool:
+        def connection(self): return Connection()
+
+    store = PostgresInvestigationStore.__new__(PostgresInvestigationStore)
+    store.pool = Pool()
+    assert store._rows("SELECT * FROM investigations", ()) == [{"investigation_id": "INV-000001"}]
 
 
 def test_container_uses_api_dependency_set_and_excludes_training_data():

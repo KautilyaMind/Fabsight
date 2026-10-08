@@ -24,7 +24,10 @@ class PostgresInvestigationStore:
    for statement in statements:c.execute(statement)
  def _rows(self,query:str,params:tuple=())->list[dict[str,Any]]:
   from psycopg.rows import dict_row
-  with self.pool.connection() as c:return list(c.execute(query,params,row_factory=dict_row).fetchall())
+  with self.pool.connection() as c:
+   with c.cursor(row_factory=dict_row) as cursor:
+    cursor.execute(query,params)
+    return list(cursor.fetchall())
  def create(self,case_id:str)->dict[str,Any]:
   with self.pool.connection() as c:
    number=c.execute("SELECT nextval('investigation_number_seq')").fetchone()[0];iid=f"INV-{number:06d}";stamp=now();c.execute("INSERT INTO investigations VALUES(%s,%s,%s,%s,%s,%s,NULL)",(iid,case_id,"CREATED","DRAFT",stamp,stamp))
