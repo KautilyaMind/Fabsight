@@ -17,7 +17,14 @@ EVALUATION_QUERIES = (
     {"query": "equipment maintenance and alarm chronology", "expected_topic": "maintenance"},
     {"query": "wafer map scratch spatial pattern", "expected_topic": "scratch"},
     {"query": "lithography manufacturing monitoring", "expected_topic": "lithography"},
-    {"query": "investigate conflicting inspection evidence", "expected_topic": "anomaly_investigation"},
+    {"query": "missing investigation evidence after a tool failure or unavailable record", "expected_topic": "missing"},
+    {"query": "annular donut wafer defect signature", "expected_topic": "donut"},
+    {"query": "low confidence competing wafer map classes", "expected_topic": "vision"},
+    {"query": "SECOM classifier failure probability and influential anonymous features", "expected_topic": "secom"},
+    {"query": "synthetic telemetry pressure oscillation instability", "expected_topic": "pressure"},
+    {"query": "human engineer approval of AI investigation", "expected_topic": "human"},
+    {"query": "evidence conflict resolution when process vision and equipment disagree", "expected_topic": "conflict"},
+    {"query": "contain affected lot and preserve wafer evidence", "expected_topic": "containment"},
 )
 
 

@@ -182,3 +182,13 @@ def test_retrieval_evaluation_runs(tmp_path: Path) -> None:
     assert report["successful_expected_topic_hits"] == 2
     assert report["hit_rate"] == 1.0
     assert (reports / "retrieval_evaluation.json").is_file()
+
+
+def test_project_knowledge_corpus_is_substantial_and_synthetic() -> None:
+    raw = PROJECT_ROOT / "data" / "knowledge" / "raw"
+    documents, summary = load_documents(raw)
+    synthetic = [item for item in documents if item.source_type == "SYNTHETIC_EDUCATIONAL"]
+    assert summary["files_loaded"] >= 33
+    assert len(synthetic) >= 33
+    assert sum(len(item.text) for item in synthetic) >= 100_000
+    assert all("synthetic" in item.text.lower() for item in synthetic)

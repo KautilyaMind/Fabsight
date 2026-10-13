@@ -1,5 +1,17 @@
 # FabSight v0.6 knowledge retrieval
 
+## Current knowledge-base 2.0 profile
+
+The deployed portfolio now packages 33 synthetic educational Markdown documents:
+the original three references plus 30 detailed investigation guides. The corpus is
+split into 156 traceable chunks and covers fab process steps, wafer-map patterns,
+equipment and maintenance review, synthetic telemetry scenarios, multimodal evidence
+conflicts, human approval, containment, and citation quality. The committed FAISS
+index remains small enough for Streamlit while being substantial enough to demonstrate
+topic-specific retrieval. A 15-query top-three sanity suite currently produces 15
+expected-topic hits; this remains a software retrieval check, not a production-quality
+or causal-validity benchmark.
+
 FabSight v0.6 adds a local retrieval foundation. It does not add an autonomous agent,
 LLM-generated answer, or case-specific physical conclusion.
 
@@ -47,9 +59,11 @@ may label each source as:
 Files absent from the manifest default to `USER_PROVIDED`. Provenance, source
 filename, page, document type, and custom metadata remain attached to every chunk.
 
-The included starter files are short synthetic educational references. Each states
-that it is not a production SOP. They contain no recipes, doses, private limits, or
-company-specific procedures.
+The included corpus contains synthetic educational references. Each states that it
+is not a production SOP. They contain no recipes, doses, private limits, or
+company-specific procedures. Run `scripts/generate_synthetic_knowledge.py` to
+reproduce the 30-document expansion, then `scripts/build_knowledge_base.py` to rebuild
+the chunks, embeddings, index, and evaluation report.
 
 ## Chunking
 
@@ -80,7 +94,7 @@ or system commands.
 
 ## Basic evaluation
 
-Eight educational queries check whether an expected topic appears in the top three
+Fifteen educational queries check whether an expected topic appears in the top three
 results. This hit rate is a retrieval sanity check, not a production benchmark.
 
 ## Architectural progression

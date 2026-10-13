@@ -1,14 +1,353 @@
 {
+  "synthetic_chamber_matching.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "equipment",
+      "chamber",
+      "matching"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_cmp_uniformity_scratch.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "cmp",
+      "uniformity",
+      "scratch"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_cross_modal_investigation.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "agent",
+      "cross",
+      "modal",
+      "investigation"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_deposition_thickness_uniformity.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "deposition",
+      "thickness",
+      "uniformity"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_equipment_alarm_triage.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "equipment",
+      "alarm",
+      "triage"
+    ],
+    "version": "1.0"
+  },
   "synthetic_etch_overview.md": {
     "source_type": "SYNTHETIC_EDUCATIONAL",
-    "topics": ["etch", "fabrication", "process_control"]
+    "topics": [
+      "etch",
+      "fabrication",
+      "process_control"
+    ]
+  },
+  "synthetic_etch_rate_selectivity.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "etch",
+      "rate",
+      "selectivity"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_evidence_conflict_resolution.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "agent",
+      "evidence",
+      "conflict",
+      "resolution"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_human_review_approval.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "governance",
+      "human",
+      "review",
+      "approval"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_implant_dose_energy.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "implant",
+      "dose",
+      "energy"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_inspection_sampling_strategy.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "sampling",
+      "strategy"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_lithography_overlay_cd.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "lithography",
+      "overlay",
+      "cd"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_lot_wafer_containment.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "operations",
+      "lot",
+      "wafer",
+      "containment"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_maintenance_event_correlation.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "equipment",
+      "maintenance",
+      "event",
+      "correlation"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_missing_evidence_management.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "agent",
+      "missing",
+      "evidence",
+      "management"
+    ],
+    "version": "1.0"
   },
   "synthetic_process_monitoring_guide.md": {
     "source_type": "SYNTHETIC_EDUCATIONAL",
-    "topics": ["process_monitoring", "spc", "maintenance", "anomaly_investigation", "cmp", "lithography", "deposition"]
+    "topics": [
+      "process_monitoring",
+      "spc",
+      "maintenance",
+      "anomaly_investigation",
+      "cmp",
+      "lithography",
+      "deposition"
+    ]
+  },
+  "synthetic_rag_citation_quality.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "knowledge",
+      "rag",
+      "citation",
+      "quality"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_secom_anonymous_features.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "process_model",
+      "secom",
+      "anonymous",
+      "features"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_spc_signal_review.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "monitoring",
+      "spc",
+      "signal",
+      "review"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_telemetry_endpoint_drift.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "telemetry",
+      "endpoint",
+      "drift"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_telemetry_gas_flow_deviation.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "telemetry",
+      "gas",
+      "flow",
+      "deviation"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_telemetry_pressure_instability.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "telemetry",
+      "pressure",
+      "instability"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_telemetry_thermal_drift.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "telemetry",
+      "thermal",
+      "drift"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_vision_low_confidence.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "vision_model",
+      "vision",
+      "low",
+      "confidence"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wafer_center_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "center",
+      "pattern"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wafer_donut_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "donut",
+      "pattern"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wafer_edge_ring_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "edge",
+      "ring",
+      "pattern"
+    ],
+    "version": "1.0"
   },
   "synthetic_wafer_inspection_notes.md": {
     "source_type": "SYNTHETIC_EDUCATIONAL",
-    "topics": ["wafer_inspection", "wafer_maps", "edge_ring", "scratch", "quality_engineering"]
+    "topics": [
+      "wafer_inspection",
+      "wafer_maps",
+      "edge_ring",
+      "scratch",
+      "quality_engineering"
+    ]
+  },
+  "synthetic_wafer_local_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "local",
+      "pattern"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wafer_near_full_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "near",
+      "full",
+      "pattern"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wafer_random_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "random",
+      "pattern"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wafer_scratch_pattern.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "inspection",
+      "wafer",
+      "scratch",
+      "pattern"
+    ],
+    "version": "1.0"
+  },
+  "synthetic_wet_clean_particle_excursion.md": {
+    "purpose": "FabSight investigation guidance",
+    "source_type": "SYNTHETIC_EDUCATIONAL",
+    "topics": [
+      "clean",
+      "wet",
+      "particle",
+      "excursion"
+    ],
+    "version": "1.0"
   }
 }

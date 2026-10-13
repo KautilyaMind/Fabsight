@@ -55,7 +55,7 @@ TELEMETRY_READINGS_PER_RUN = 12
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 KNOWLEDGE_CHUNK_SIZE = 1000
 KNOWLEDGE_CHUNK_OVERLAP = 150
-KNOWLEDGE_BASE_VERSION = "1.0"
+KNOWLEDGE_BASE_VERSION = "2.0"
 
 # Educational demonstration thresholds, not production process-control limits.
 FAILURE_THRESHOLD = 0.50
